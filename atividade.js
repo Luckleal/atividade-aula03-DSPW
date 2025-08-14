@@ -6,20 +6,39 @@ const livros = require('./biblioteca');
 //
 // Crie uma função (modelo tradicional) que aceite um gênero como parâmetro
 // e retorne um novo array com todos os livros desse gênero.
+function encontrarLivrosPorGenero(genero){
+    const resultado = [];
+
+    for (let i = 0; i < livros.length; i++){
+        if (livros[i].genero.toLowerCase() === genero.toLowerCase()){
+            resultado.push(livros[i]);
+        }
+    }
+    return resultado
+}
 // ------------------------------------------------------------------------
 
 // Sua vez
 
 // Teste da Atividade 1
 console.log('--- Atividade 1: Livros de Ficção Científica (Função Tradicional) ---');
-// const livrosDeFiccao = encontrarLivrosPorGenero('Ficção Científica');
-// console.log(livrosDeFiccao);
+const livrosDeFiccao = encontrarLivrosPorGenero('Ficção Científica');
+console.log(livrosDeFiccao);
 
 
 // ------------------------------------------------------------------------
 // ATIVIDADE 2: Refatorando com Arrow Function
 //
 // Faça a mesma função da Atividade 1, mas agora usando Arrow Function.
+const encontrarLivrosPorGeneroArrow = (genero) => {
+    const resultado = [];
+    for (let i = 0; i < livros.length; i++){
+        if (livros[i].genero.toLowerCase() === genero.toLowerCase()){
+            resultado.push(livros[i])
+        }
+    }
+    return resultado
+}
 // ------------------------------------------------------------------------
 
 
@@ -28,8 +47,8 @@ console.log('--- Atividade 1: Livros de Ficção Científica (Função Tradicion
 
 // Teste da Atividade 2
 console.log('\n--- Atividade 2: Livros de Distopia (Arrow Function) ---');
-// const livrosDeDistopia = encontrarLivrosPorGeneroArrow('Distopia');
-// console.log(livrosDeDistopia);
+const livrosDeDistopia = encontrarLivrosPorGeneroArrow('Distopia');
+console.log(livrosDeDistopia);
 
 
 // ------------------------------------------------------------------------
@@ -37,6 +56,20 @@ console.log('\n--- Atividade 2: Livros de Distopia (Arrow Function) ---');
 //
 // Crie uma função que retorne um novo array contendo apenas os títulos
 // de todos os livros da biblioteca.
+
+//------------------------------------------------------------------------
+// function obterApenasTitulos(titulo){
+//     const titulos = [];
+
+//     for (let i = 0; i < livros.length; i++){
+//         if (livros[i].titulo.toLowerCase() === titulo.toLowerCase()){
+//             titulos.push(livros[i])
+//         }
+//     }
+//     return titulos
+// }
+
+const obterApenasTitulos = () => livros.map(livro => livro.titulo) 
 // ------------------------------------------------------------------------
 
 
@@ -45,8 +78,8 @@ console.log('\n--- Atividade 2: Livros de Distopia (Arrow Function) ---');
 
 // Teste da Atividade 3
 console.log('\n--- Atividade 3: Lista de todos os títulos ---');
-// const todosOsTitulos = obterApenasTitulos();
-// console.log(todosOsTitulos);
+const todosOsTitulos = obterApenasTitulos();
+console.log(todosOsTitulos);
 
 
 // ------------------------------------------------------------------------
@@ -56,6 +89,8 @@ console.log('\n--- Atividade 3: Lista de todos os títulos ---');
 // A função deve retornar um array com os livros desse autor publicados
 // DEPOIS do ano especificado.
 // Dica: você precisará encadear (usar um após o outro) os métodos filter.
+const livrosDeAutorAposAno = (nome, ano) => 
+    livros.filter(livros => livros.autor === nome && livros.anoPublicacao > ano );
 // ------------------------------------------------------------------------
 
 
@@ -64,8 +99,8 @@ console.log('\n--- Atividade 3: Lista de todos os títulos ---');
 
 // Teste da Atividade 4
 console.log('\n--- Atividade 4: Livros de J.R.R. Tolkien publicados após 1950 ---');
-// const livrosTolkienPos1950 = livrosDeAutorAposAno('J.R.R. Tolkien', 1950);
-// console.log(livrosTolkienPos1950);
+const livrosTolkienPos1950 = livrosDeAutorAposAno('J.R.R. Tolkien', 1950);
+console.log(livrosTolkienPos1950);
 
 
 
@@ -79,6 +114,7 @@ console.log('\n--- Atividade 4: Livros de J.R.R. Tolkien publicados após 1950 -
 // Para tornar o código mais limpo, você deve usar a DESESTRUTURAÇÃO
 // para extrair as propriedades 'titulo', 'autor' e 'anoPublicacao'
 // de cada objeto livro diretamente no parâmetro da função do .map().
+const criarCartoesDeLivros = () => livros.map(({titulo, autor, anoPublicacao}) => ({titulo, autor, anoPublicacao}))
 // ------------------------------------------------------------------------
 
 
@@ -88,5 +124,5 @@ console.log('\n--- Atividade 4: Livros de J.R.R. Tolkien publicados após 1950 -
   
 // Teste da Atividade 5
 console.log('\n--- Atividade 5: Cartões de Apresentação dos Livros ---');
-// const cartoes = criarCartoesDeLivros();
-// console.log(cartoes);
+const cartoes = criarCartoesDeLivros();
+console.log(cartoes);
